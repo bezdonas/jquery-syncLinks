@@ -7,6 +7,10 @@
 		var cont = $(this),
 			hoverClass = hoverClass ? hoverClass : 'hover';
 
+		if (cont.length === 0) {
+			return false;
+		}
+
 		cont.find('a').each(function() {
 
 			var elem = $(this),

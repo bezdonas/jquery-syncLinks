@@ -1,7 +1,7 @@
 (function($) {
 
-	// Синхронизирует ховер у всех ссылок ведущих на одинаковую страницу внутри вызывающего контейнера
-	// Посредством класса hover (нужно прописать в цсс)
+	// Syncs links hover with equal href attribute inside calling container
+	// It's done via 'hover' class, which must duplicate :hover effect in css
 	$.fn.syncLinks = function(hoverClass) {
 
 		var cont = $(this),
@@ -18,10 +18,12 @@
 				brothers = cont.find('a[href="' + href + '"]');
 
 			elem
-				.on('mouseover', cont, function() {
+				.off('mouseover.syncLinks')
+				.off('mouseleave.syncLinks')
+				.on('mouseover.syncLinks', cont, function() {
 					brothers.addClass(hoverClass);
 				})
-				.on('mouseleave', cont, function() {
+				.on('mouseleave.syncLinks', cont, function() {
 					brothers.removeClass(hoverClass);
 				});
 
